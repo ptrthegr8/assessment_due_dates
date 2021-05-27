@@ -1,32 +1,26 @@
-import datetime
+from datetime import datetime, timedelta
 
 import click
 from dateutil import parser
 
 
-def generate_drop_dead_due_date(dd):
-    dd_delta = datetime.timedelta(days=5)
-    dd_due_date = dd + dd_delta
-    return dd_due_date
-
-
-def generate_two_weeks_date(dd_due_date):
-    dd_delta = datetime.timedelta(days=14)
-    two_week_due_date = dd_due_date + dd_delta
-    return two_week_due_date
+def calc_new_due_date(date: datetime, days: int):
+    delta = timedelta(days=days)
+    new_due_date = date + delta
+    return new_due_date
 
 
 @click.command()
 @click.option(
     "--due_date",
-    default=datetime.datetime.now,
-    prompt="Your due date",
+    default=datetime.now,
+    prompt="Enter due date",
     help="due date for assessment.",
 )
-def get_due_dates(due_date):
+def get_due_dates(due_date: str):
     dd = parser.parse(due_date)
-    dd_due_date = generate_drop_dead_due_date(dd)
-    two_week_due_date = generate_two_weeks_date(dd_due_date)
+    dd_due_date = calc_new_due_date(dd, 5)
+    two_week_due_date = calc_new_due_date(dd_due_date, 14)
     output_format = "%A, %B %d, %Y"
 
     click.echo(
