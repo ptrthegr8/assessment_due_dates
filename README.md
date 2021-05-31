@@ -13,6 +13,7 @@ git clone https://github.com/ptrthegr8/assessment_due_dates
 ## Usage
 
 ```bash
+$ cd assessment_due_dates
 $ poetry install
 $ poetry shell
 $ python main.py
