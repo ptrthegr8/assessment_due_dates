@@ -4,7 +4,7 @@ import click
 from dateutil import parser
 
 
-def calc_new_due_date(date: datetime, days: int):
+def calc_new_due_date(date: datetime, days: int) -> datetime:
     delta = timedelta(days=days)
     new_due_date = date + delta
     return new_due_date
@@ -17,7 +17,7 @@ def calc_new_due_date(date: datetime, days: int):
     prompt="Enter due date",
     help="due date for assessment.",
 )
-def get_due_dates(due_date: str):
+def get_due_dates(due_date: str) -> None:
     dd = parser.parse(due_date)
     dd_due_date = calc_new_due_date(dd, 5)
     two_week_due_date = calc_new_due_date(dd_due_date, 14)
